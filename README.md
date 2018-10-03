@@ -1,0 +1,1 @@
+football.ua extension for Chrome & Firefox.

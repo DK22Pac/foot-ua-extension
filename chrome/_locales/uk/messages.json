@@ -1,0 +1,53 @@
+{
+    "appName": {
+        "message": "Розширення football.ua"
+    },
+    "appDesc": {
+        "message": "Розширення, яке додає невеликі зміни для сайту football.ua"
+    },
+    "links": {
+        "message": "Посилання"
+    },
+     "commCount": {
+        "message": "Лічильник коментарів"
+    },
+    "matchesList": {
+        "message": "Список матчів"
+    },
+    "cllinks": {
+        "message": "Замінити посилання на champions.football.ua"
+    },
+    "islinks": {
+        "message": "Прибрати новини з isport"
+    },
+    "islogo": {
+        "message": "Прибрати лого isport на верхній панелі"
+    },
+    "ccnews": {
+        "message": "Показувати к-сть комментарів"
+    },
+    "ccmatch": {
+        "message": "Показувати к-сть комментарів в списку матчів"
+    },
+    "cicon": {
+        "message": "Відображати іконку коментарю"
+    },
+    "hoticon": {
+        "message": "Відображати \"гарячі\" іконки"
+    },
+    "hotcount": {
+        "message": "Якщо коментарів більше ніж"
+    },
+    "cccol": {
+        "message": "Колір лічильника коментарів"
+    },
+    "ciconcol": {
+        "message": "Колір іконки коментарю"
+    },
+    "compicons": {
+        "message": "Відображати іконки змагань"
+    },
+    "apply": {
+        "message": "Застосувати"
+    }
+}
