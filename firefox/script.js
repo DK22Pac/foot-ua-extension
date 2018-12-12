@@ -1,6 +1,6 @@
 ﻿function replace_cl_link_with_normal_one(elem, link) {
     var link_comps = link.split("/"); // get link 'category' ('news', 'game' or 'galleries')
-    if (link_comps.length < 5) // http://champions.football.ua/category/id
+    if (link_comps.length < 5) // https://champions.football.ua/category/id
         return;
     var can_translate = false; // can we translate this link?
     switch (link_comps[3]) { // 'category' name
@@ -76,21 +76,21 @@ function add_comment_count(elem, options) {
         var strid = ""; // id string
         var link_comps, itemId, commentType;
         var link = elem.getAttribute("href");
-        if (link.startsWith("http://footballua.oll.tv/")) {
-            link_comps = link.split("/"); // 'video' http://footballua.oll.tv/id.html (4) commentType=9
+        if (link.startsWith("https://footballua.oll.tv/")) {
+            link_comps = link.split("/"); // 'video' https://footballua.oll.tv/id.html (4) commentType=9
             if (link_comps.length == 4 && link_comps[3].endsWith(".html")) {
                 commentType = 9;
                 strid = link_comps[3];
             }
         }
-        else if (link.startsWith("http://football.ua/")) {
-            link_comps = link.split("/"); // 'game'    http://football.ua/category/game/id.html (6) commentType=2
-                                          // 'article' http://football.ua/blog/category/id.html (6) commentType=1
-                                          // 'news'    http://football.ua/category/id-name.html (5) commentType=1
-                                          // 'game'    http://football.ua/games_online/id.html (5) commentType=2
-                                          // 'game'    http://football.ua/game/id.html (5) commentType=2
-                                          // 'gallery' http://football.ua/gallery/id.html (5) commentType=4
-                                          // 'turkish' http://football.ua/default.aspx...game_id=id (4) commentType=2
+        else if (link.startsWith("https://football.ua/")) {
+            link_comps = link.split("/"); // 'game'    https://football.ua/category/game/id.html (6) commentType=2
+                                          // 'article' https://football.ua/blog/category/id.html (6) commentType=1
+                                          // 'news'    https://football.ua/category/id-name.html (5) commentType=1
+                                          // 'game'    https://football.ua/games_online/id.html (5) commentType=2
+                                          // 'game'    https://football.ua/game/id.html (5) commentType=2
+                                          // 'gallery' https://football.ua/gallery/id.html (5) commentType=4
+                                          // 'turkish' https://football.ua/default.aspx...game_id=id (4) commentType=2
             if (link_comps.length == 6 && link_comps[5].endsWith(".html")) {
                 strid = link_comps[5];
                 if (options.ccmatch && link_comps[4] == "game")
@@ -122,7 +122,7 @@ function add_comment_count(elem, options) {
         if (strid != "") {
             var id = parseInt(strid, 10);
             if (!isNaN(id)) {
-                var url = "http://services.football.ua/api/Comment/Comments?itemId=" + id + "&commentType=" + commentType + "&pageIndex=0&pageSize=25&sort=0&anchor=";
+                var url = "https://services.football.ua/api/Comment/Comments?itemId=" + id + "&commentType=" + commentType + "&pageIndex=0&pageSize=25&sort=0&anchor=";
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", url, true);
                 xhr.timeout = 30000;
@@ -180,7 +180,7 @@ function process_links_for_element(root, isslider, options) {
     for (var e = 0; e < elems.length; e++) {
         var link = elems[e].getAttribute("href");
         if (link != null) {
-            if (options.cllinks && link.startsWith("http://champions.football.ua/"))
+            if (options.cllinks && link.startsWith("https://champions.football.ua/"))
                 replace_cl_link_with_normal_one(elems[e], link);
             if (!isslider && options.ccnews)
                 add_comment_count(elems[e], options);
