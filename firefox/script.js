@@ -22,6 +22,16 @@
     }
 }
 
+function replace_euro2020_link_with_normal_one(elem, link) {
+    var link_comps = link.split("/"); // get link 'category' ('news', 'games' or 'video')
+    if (link_comps.length == 6) { // https://football.ua/euro2020/game/id.html
+        if (link_comps[4] == "game")
+            elem.setAttribute("href", link_comps[0] + "//football.ua/game/" + link_comps[5]);
+    }
+    else if (link_comps.length == 5) // https://football.ua/euro2020/id-title.html
+        elem.setAttribute("href", link_comps[0] + "//football.ua/uefa/" + link_comps[4]);
+}
+
 function parent(elem, level) {
     var result = elem.parentElement;
     while (level != 0) {
@@ -180,8 +190,12 @@ function process_links_for_element(root, isslider, options) {
     for (var e = 0; e < elems.length; e++) {
         var link = elems[e].getAttribute("href");
         if (link != null) {
-            if (options.cllinks && link.startsWith("https://champions.football.ua/"))
-                replace_cl_link_with_normal_one(elems[e], link);
+            if (options.cllinks) {
+                if (link.startsWith("https://champions.football.ua/"))
+                    replace_cl_link_with_normal_one(elems[e], link);
+                else if (link.startsWith("https://football.ua/euro2020/"))
+                    replace_euro2020_link_with_normal_one(elems[e], link);
+            }
             if (!isslider && options.ccnews)
                 add_comment_count(elems[e], options);
         }
@@ -205,7 +219,7 @@ function process_competition_logo(elem) {
         imgname = "deu";
     else if (title.startsWith("испания.") || title == "кубок испании" || title == "суперкубок испании")
         imgname = "esp";
-    else if (title.startsWith("португалия.") || title == "кубок португалии" || title == "суперкубок португалии")
+    else if (title.startsWith("португалия.") || title == "кубок португалии" || title == "кубок португальской лиги" || title == "суперкубок португалии")
         imgname = "prt";
     else if (title.startsWith("турция.") || title == "кубок турции" || title == "суперкубок турции")
         imgname = "tur";
@@ -215,10 +229,14 @@ function process_competition_logo(elem) {
         imgname = "nld";
     else if  (title.startsWith("чемпионат европы") || title == "лига наций" || title == "суперкубок уефа")
         imgname = "uefa";
-    else if (title == "чемпионат мира" || title == "кубок конфедераций" || title.startsWith("отбор на ЧМ.") || title == "клубный чемпионат мира")
+    else if (title == "чемпионат мира" || title == "кубок конфедераций" || title.startsWith("отбор на ЧМ") || title == "клубный чемпионат мира")
         imgname = "fifa";
     else if (title == "международный кубок чемпионов")
         imgname = "icc";
+    else if (title == "кубок азии")
+        imgname = "afc";
+    else if (title == "юношеская лига уефа")
+        imgname = "youth";
     if (imgname != "") {
         var imglink = chrome.extension.getURL("images/tournament/" + imgname + ".png");
         elem.innerHTML = "<img src=\"" + imglink + "\" height=" + 14 + "px style=\"display:inline\">&nbsp&nbsp" + elem.innerHTML;
