@@ -1,18 +1,30 @@
+//
+// FOOTBALL.UA Extension
+// https://github.com/DK22Pac/foot-ua-extension
+//
+
 function switch_comments_options() {
     var disable = !document.getElementById("ccnews").checked;
     document.getElementById("ccmatch").disabled = disable;
     document.getElementById("cicon").disabled = disable;
+    document.getElementById("ciconsymbol").disabled = disable;
+    document.getElementById("ciconcol").disabled = disable;
     document.getElementById("hoticon").disabled = disable;
     document.getElementById("cccol").disabled = disable;
-    document.getElementById("ciconcol").disabled = disable;
-    if (disable)
+    if (disable) {
+        document.getElementById("hotsymbol").disabled = true;
+        document.getElementById("hotcol").disabled = true;
         document.getElementById("hotcount").disabled = true;
+    }
     else
         switch_hoticon();
 }
 
 function switch_hoticon() {
-    document.getElementById("hotcount").disabled = !document.getElementById("hoticon").checked;
+    var disabled = !document.getElementById("hoticon").checked;
+    document.getElementById("hotsymbol").disabled = disabled;
+    document.getElementById("hotcol").disabled = disabled;
+    document.getElementById("hotcount").disabled = disabled;
 }
 
 function save_options() {
@@ -22,11 +34,15 @@ function save_options() {
     var ccnews = document.getElementById("ccnews").checked;
     var ccmatch = document.getElementById("ccmatch").checked;
     var cicon = document.getElementById("cicon").checked;
+    var ciconsymbol = document.getElementById("ciconsymbol").value;
+    var ciconcol = document.getElementById("ciconcol").value;
     var hoticon = document.getElementById("hoticon").checked;
+    var hotsymbol = document.getElementById("hotsymbol").value;
+    var hotcol = document.getElementById("hotcol").value;
     var hotcount = document.getElementById("hotcount").value;
     var cccol = document.getElementById("cccol").value;
-    var ciconcol = document.getElementById("ciconcol").value;
     var compicons = document.getElementById("compicons").checked;
+    
     chrome.storage.sync.set({
         cllinks: cllinks,
         islinks: islinks,
@@ -34,22 +50,29 @@ function save_options() {
         ccnews: ccnews,
         ccmatch: ccmatch,
         cicon: cicon,
+        ciconsymbol: ciconsymbol,
+        ciconcol: ciconcol,
         hoticon: hoticon,
+        hotsymbol: hotsymbol,
+        hotcol: hotcol,
         hotcount: hotcount,
         cccol: cccol,
-        ciconcol: ciconcol,
         compicons: compicons
     });
     chrome.tabs.query({
         active: true,
         currentWindow: true
     }, function(tabs) {
-        if (tabs[0].url.substr(7).startsWith("football.ua"))
+        if (tabs[0].url.substr(8).startsWith("football.ua"))
             chrome.tabs.reload();
     });
 }
 
-function restore_options() {
+function open_github_link() {
+    chrome.tabs.create({url:"https://github.com/DK22Pac/foot-ua-extension"});
+}
+
+function on_loaded() {
     chrome.storage.sync.get({
         cllinks: true,
         islinks: false,
@@ -57,10 +80,13 @@ function restore_options() {
         ccnews: true,
         ccmatch: true,
         cicon: true,
+        ciconsymbol: "🗨",
+        ciconcol: "#009933",
         hoticon: true,
+        hotsymbol: "🔥",
+        hotcol: "#ff8000",
         hotcount: "100",
         cccol: "#009933",
-        ciconcol: "#009933",
         compicons: true
     }, function(items) {
         document.getElementById("cllinks").checked = items.cllinks;
@@ -69,13 +95,17 @@ function restore_options() {
         document.getElementById("ccnews").checked = items.ccnews;
         document.getElementById("ccmatch").checked = items.ccmatch;
         document.getElementById("cicon").checked = items.cicon;
+        document.getElementById("ciconsymbol").value = items.ciconsymbol;
+        document.getElementById("ciconcol").value = items.ciconcol;
         document.getElementById("hoticon").checked = items.hoticon;
+        document.getElementById("hotsymbol").value = items.hotsymbol;
+        document.getElementById("hotcol").value = items.hotcol;
         document.getElementById("hotcount").value = items.hotcount;
         document.getElementById("cccol").value = items.cccol;
-        document.getElementById("ciconcol").value = items.ciconcol;
         document.getElementById("compicons").checked = items.compicons;
         switch_comments_options();
     });
+    document.getElementById("github-link").addEventListener("click", open_github_link);
 }
 
 function localize() {
@@ -90,7 +120,7 @@ function localize() {
 }
 
 localize();
-document.addEventListener("DOMContentLoaded", restore_options);
+document.addEventListener("DOMContentLoaded", on_loaded);
 document.getElementById("save").addEventListener("click", save_options);
 document.getElementById("ccnews").addEventListener("click", switch_comments_options);
 document.getElementById("hoticon").addEventListener("click", switch_hoticon);

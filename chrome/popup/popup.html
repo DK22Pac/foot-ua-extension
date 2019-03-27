@@ -1,22 +1,50 @@
 ﻿<!DOCTYPE html>
 <html>
-<head><title>Options</title><link rel="stylesheet" type="text/css" href="popup.css"></head>
+<head><title>Football.ua Extension Options</title><link rel="stylesheet" type="text/css" href="popup.css"></head>
 <body>
+<div class="block-top">
+    <div class="logo-title inline"></div>
+    <div class="right inline">
+        <a href="#"><div id="github-link" class="github-icon"></div></a>
+        <div class="version">__MSG_appVersion__</div>
+    </div>
+</div>
 <div class="header">__MSG_links__</div>
-<div><label><input type="checkbox" id="cllinks" checked>__MSG_cllinks__</label></div>
-<div><label><input type="checkbox" id="islinks">__MSG_islinks__</label></div>
-<div><label><input type="checkbox" id="islogo">__MSG_islogo__</label></div>
+<div>
+    <label><input type="checkbox" id="cllinks" checked>__MSG_cllinks__</label>
+</div>
+<div>
+    <label><input type="checkbox" id="islinks">__MSG_islinks__</label>
+</div>
+<div>
+    <label><input type="checkbox" id="islogo">__MSG_islogo__</label>
+</div>
 <div class="header">__MSG_commCount__</div>
-<div><label><input type="checkbox" id="ccnews" checked>__MSG_ccnews__</label></div>
-<div><label><input type="checkbox" id="ccmatch" checked>__MSG_ccmatch__</label></div>
-<div><label><input type="checkbox" id="cicon" checked>__MSG_cicon__</label></div>
-<div><label><input type="checkbox" id="hoticon" checked>__MSG_hoticon__</label></div>
-<div class="nested"><label>__MSG_hotcount__<input type="number" id="hotcount" min="0" value="100"></label></div>
-<div><label>__MSG_cccol__<input type="color" id="cccol" value="#009933"></label></div>
-<div><label>__MSG_ciconcol__<input type="color" id="ciconcol" value="#009933"></label></div>
+<div>
+    <span><label><input type="checkbox" id="ccnews" checked>__MSG_ccnews__</label></span>
+    <span class="right"><input type="color" id="cccol" value="#009933"></span>
+</div>
+<div>
+    <label><input type="checkbox" id="ccmatch" checked>__MSG_ccmatch__</label>
+</div>
+<div>
+    <span><label><input type="checkbox" id="cicon" checked>__MSG_cicon__</label></span>
+    <span class="right"><input type="color" id="ciconcol" value="#009933"></span>
+    <span class="right"><input type="text" class="input-one-symbol" id="ciconsymbol" value="🗨" maxlength="2"></span>
+</div>
+<div>
+    <span><label><input type="checkbox" id="hoticon" checked>__MSG_hoticon__</label></span>
+    <span class="right"><input type="color" id="hotcol" value="#ffffff"></span>
+    <span class="right"><input type="text" class="input-one-symbol" id="hotsymbol" value="🔥" maxlength="2"></span>
+</div>
+<div class="nested">
+    <label>__MSG_hotcount__<input type="number" id="hotcount" min="0" value="100"></label>
+</div>
 <div class="header">__MSG_matchesList__</div>
-<div><label><input type="checkbox" id="compicons" checked>__MSG_compicons__</label></div>
-<div class="save-button"><button id="save">__MSG_apply__</button></div>
+<div>
+    <label><input type="checkbox" id="compicons" checked>__MSG_compicons__</label>
+</div>
+<div class="save-button block-bottom"><button id="save">__MSG_apply__</button></div>
 <script src="popup.js"></script>
 </body>
 </html>

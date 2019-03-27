@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "ru",
@@ -24,11 +24,11 @@
     ],
     "permissions": [
         "storage",
+        "tabs",
         "https://services.football.ua/*",
         "https://football.ua/",
         "https://champions.football.ua/",
         "https://euro2020.football.ua/",
         "https://footballua.oll.tv/"
-        
     ]
 }

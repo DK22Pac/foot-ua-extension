@@ -2,6 +2,9 @@
     "appName": {
         "message": "Розширення football.ua"
     },
+    "appVersion": {
+        "message": "версія 1.0.4"
+    },
     "appDesc": {
         "message": "Розширення, яке додає невеликі зміни для сайту football.ua"
     },
@@ -37,12 +40,6 @@
     },
     "hotcount": {
         "message": "Якщо коментарів більше ніж"
-    },
-    "cccol": {
-        "message": "Колір лічильника коментарів"
-    },
-    "ciconcol": {
-        "message": "Колір іконки коментарю"
     },
     "compicons": {
         "message": "Відображати іконки змагань"

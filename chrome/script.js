@@ -1,4 +1,9 @@
-﻿function replace_cl_link_with_normal_one(elem, link) {
+﻿//
+// FOOTBALL.UA Extension
+// https://github.com/DK22Pac/foot-ua-extension
+//
+
+function replace_cl_link_with_normal_one(elem, link) {
     var link_comps = link.split("/"); // get link 'category' ('news', 'game' or 'galleries')
     if (link_comps.length < 5) // https://champions.football.ua/category/id
         return;
@@ -26,10 +31,18 @@ function replace_euro2020_link_with_normal_one(elem, link) {
     var link_comps = link.split("/"); // get link 'category' ('news', 'games' or 'video')
     if (link_comps.length == 6) { // https://football.ua/euro2020/game/id.html
         if (link_comps[4] == "game")
-            elem.setAttribute("href", link_comps[0] + "//football.ua/game/" + link_comps[5]);
+            elem.setAttribute("href", link_comps[0] + "//football.ua/germany/game/" + link_comps[5]);
     }
     else if (link_comps.length == 5) // https://football.ua/euro2020/id-title.html
         elem.setAttribute("href", link_comps[0] + "//football.ua/uefa/" + link_comps[4]);
+    else if (link_comps.length == 4) { // https://football.ua/default.aspx?menu_id=football_matchcenter&game_id=id
+        var idIndex = link_comps[3].indexOf("game_id=");
+        if (idIndex != -1) {
+            var gameId = parseInt(link_comps[3].substr(idIndex + 8));
+            if (!isNaN(gameId))
+                elem.setAttribute("href", link_comps[0] + "//football.ua/germany/game/" + gameId + ".html");
+        }
+    }
 }
 
 function parent(elem, level) {
@@ -158,7 +171,7 @@ function add_comment_count(elem, options) {
                                     match_block += ">";
                                     if (totalCount != 0) {
                                         if (options.cicon)
-                                            match_block += "<font color=" + options.ciconcol + ">🗨</font>&nbsp";
+                                            match_block += "<font color=" + options.ciconcol + ">" + options.ciconsymbol + "</font>&nbsp";
                                         match_block += "<font color=" + options.cccol + ">" + totalCount + "</font>";
                                     }
                                     match_block += "</td>";
@@ -168,14 +181,15 @@ function add_comment_count(elem, options) {
                             else if (commentType != 2 && totalCount != 0) {
                                 var regular_block = "&nbsp";
                                 if (options.cicon)
-                                    regular_block += "<font color=" + options.ciconcol + ">🗨</font>&nbsp";
+                                    regular_block += "<font color=" + options.ciconcol + ">" + options.ciconsymbol + "</font>&nbsp";
                                 else
                                     regular_block += "&nbsp";
                                 regular_block += "<font color=" + options.cccol + ">" + totalCount + "</font>";
                                 if (options.hoticon && totalCount >= options.hotcount)
-                                    regular_block += "&nbsp🔥";
+                                    regular_block += "&nbsp<font color=" + options.hotcol + ">" + options.hotsymbol + "</font>";
                                 elem.innerHTML += regular_block;
                             }
+                            //alert(options.ciconsymbol);
                         }
                     }
                 };
@@ -251,10 +265,13 @@ function process_competition_logo(elem) {
         ccnews: true,
         ccmatch: true,
         cicon: true,
+        ciconsymbol: "🗨",
+        ciconcol: "#009933",
         hoticon: true,
+        hotsymbol: "🔥",
+        hotcol: "#ff8000",
         hotcount: "100",
         cccol: "#009933",
-        ciconcol: "#009933",
         compicons: true
     }, function(options) {
         process_links_for_element(document, false, options);
