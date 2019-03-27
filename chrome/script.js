@@ -189,7 +189,6 @@ function add_comment_count(elem, options) {
                                     regular_block += "&nbsp<font color=" + options.hotcol + ">" + options.hotsymbol + "</font>";
                                 elem.innerHTML += regular_block;
                             }
-                            //alert(options.ciconsymbol);
                         }
                     }
                 };

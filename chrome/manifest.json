@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "version": "1.0.4",
+    "version": "1.0.5",
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "ru",
@@ -24,7 +24,7 @@
     ],
     "permissions": [
         "storage",
-        "tabs",
+        "activeTab",
         "https://services.football.ua/*",
         "https://football.ua/",
         "https://champions.football.ua/",
