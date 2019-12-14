@@ -7,17 +7,25 @@ function switch_comments_options() {
     var disable = !document.getElementById("ccnews").checked;
     document.getElementById("ccmatch").disabled = disable;
     document.getElementById("cicon").disabled = disable;
-    document.getElementById("ciconsymbol").disabled = disable;
-    document.getElementById("ciconcol").disabled = disable;
     document.getElementById("hoticon").disabled = disable;
     document.getElementById("cccol").disabled = disable;
     if (disable) {
+        document.getElementById("ciconsymbol").disabled = disable;
+        document.getElementById("ciconcol").disabled = disable;
         document.getElementById("hotsymbol").disabled = true;
         document.getElementById("hotcol").disabled = true;
         document.getElementById("hotcount").disabled = true;
     }
-    else
+    else {
+        switch_commenticon();
         switch_hoticon();
+    }
+}
+
+function switch_commenticon() {
+    var disabled = !document.getElementById("cicon").checked;
+    document.getElementById("ciconsymbol").disabled = disabled;
+    document.getElementById("ciconcol").disabled = disabled;
 }
 
 function switch_hoticon() {
@@ -63,7 +71,7 @@ function save_options() {
         active: true,
         currentWindow: true
     }, function(tabs) {
-        if (tabs[0].url.substr(8).startsWith("football.ua"))
+        if (tabs[0].url == null || tabs[0].url.substr(8).startsWith("football.ua"))
             chrome.tabs.reload();
     });
 }
@@ -123,4 +131,5 @@ localize();
 document.addEventListener("DOMContentLoaded", on_loaded);
 document.getElementById("save").addEventListener("click", save_options);
 document.getElementById("ccnews").addEventListener("click", switch_comments_options);
+document.getElementById("cicon").addEventListener("click", switch_commenticon);
 document.getElementById("hoticon").addEventListener("click", switch_hoticon);

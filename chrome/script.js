@@ -145,7 +145,7 @@ function add_comment_count(elem, options) {
         if (strid != "") {
             var id = parseInt(strid, 10);
             if (!isNaN(id)) {
-                var url = "https://services.football.ua/api/Comment/Comments?itemId=" + id + "&commentType=" + commentType + "&pageIndex=0&pageSize=25&sort=0&anchor=";
+                var url = "https://services.football.ua/api/Comment/Comments?itemId=" + id + "&commentType=" + commentType + "&pageIndex=0&pageSize=25&sort=0&anchor=&callback=_jqjsp";
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", url, true);
                 xhr.timeout = 30000;
