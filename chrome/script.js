@@ -10,6 +10,7 @@ function replace_cl_link_with_normal_one(elem, link) {
     var can_translate = false; // can we translate this link?
     switch (link_comps[3]) { // 'category' name
         case "news": // news (regular articles) and videos
+        case "preview": // preview
             link_comps[3] = "uefa";
             can_translate = true;
             break;
