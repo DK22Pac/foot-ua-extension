@@ -3,18 +3,30 @@
 // https://github.com/DK22Pac/foot-ua-extension
 //
 
+function _$(elementId) {
+    return document.getElementById(elementId);
+}
+
+function update_disabled_value(id, state) {
+    var element = _$(id);
+
+    if (element !== null) {
+        element.disabled = state;
+    }
+}
+
 function switch_comments_options() {
     var disable = !document.getElementById("ccnews").checked;
-    document.getElementById("ccmatch").disabled = disable;
-    document.getElementById("cicon").disabled = disable;
-    document.getElementById("hoticon").disabled = disable;
-    document.getElementById("cccol").disabled = disable;
+    update_disabled_value("ccmatch", disable);
+    update_disabled_value("cicon", disable);
+    update_disabled_value("hoticon", disable);
+    update_disabled_value("cccol", disable);
     if (disable) {
-        document.getElementById("ciconsymbol").disabled = disable;
-        document.getElementById("ciconcol").disabled = disable;
-        document.getElementById("hotsymbol").disabled = true;
-        document.getElementById("hotcol").disabled = true;
-        document.getElementById("hotcount").disabled = true;
+        update_disabled_value("ciconsymbol", disable);
+        update_disabled_value("ciconcol", disable);
+        update_disabled_value("hotsymbol", true);
+        update_disabled_value("hotcol", true);
+        update_disabled_value("hotcount", true);
     }
     else {
         switch_commenticon();
@@ -24,15 +36,15 @@ function switch_comments_options() {
 
 function switch_commenticon() {
     var disabled = !document.getElementById("cicon").checked;
-    document.getElementById("ciconsymbol").disabled = disabled;
-    document.getElementById("ciconcol").disabled = disabled;
+    update_disabled_value("ciconsymbol", disabled);
+    update_disabled_value("ciconcol", disabled);
 }
 
 function switch_hoticon() {
     var disabled = !document.getElementById("hoticon").checked;
-    document.getElementById("hotsymbol").disabled = disabled;
-    document.getElementById("hotcol").disabled = disabled;
-    document.getElementById("hotcount").disabled = disabled;
+    update_disabled_value("hotsymbol", disabled);
+    update_disabled_value("hotcol", disabled);
+    update_disabled_value("hotcount", disabled);
 }
 
 function save_options() {
